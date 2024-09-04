@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Vue</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Learning Vue.js</h1>
+      <section>
+        <h2>Using CDN: {{cdn}}</h2>
+
+        <div class="things">
+          <h3>Things in Vue:</h3>
+          <ol>
+            <!-- attribute binding aka v-bind-->
+            <li
+              v-for="(thing, index) in filteredThings"
+              :key="index"
+              :class="{emoji: thing.hasEmoji}"
+            >
+              <a :href="thing.url" target="_blank">{{thing.name}}</a>
+              <button @click="toggleHasEmoji(thing)">❤️</button>
+            </li>
+          </ol>
+        </div>
+
+        <p>
+          {{num}}
+          <button @click="increaseNum">+</button>
+          <button @click="decreaseNum">-</button>
+          <button @click="toggleBomb">🤡</button>
+          <button @click="toggleVisibility">👻</button>
+
+          <template v-if="bool">
+            <span v-for="n in num" :key="n">💣</span>
+            <span v-show="isVisible">💩💩💩</span>
+            <span v-for="n in num" :key="n">🧨</span>
+          </template>
+
+          <template v-else>
+            <span v-for="(emoji, index) in getEmojiList" :key="index">{{emoji}}</span>
+            <span v-show="isVisible">🥳🥳🥳</span>
+          </template>
+        </p>
+      </section>
+
+      <section>
+        <h3>Notes</h3>
+        <ul>
+          <li>
+            The template tag doesn’t render in the DOM but allows you to use multiple
+            directives on its child elements.
+          </li>
+          <li>
+            For complex logic that includes reactive data, it is recommended to use a
+            computed property
+          </li>
+          <li>
+            Use <code>v-if</code> when the condition changes rarely and you want to
+            completely remove the element from the DOM.
+          </li>
+          <li>
+            Use <code>v-show</code> when the condition changes frequently and you need to
+            simply show or hide the element without removing it from the DOM.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>Mouse Events</h3>
+        <div class="box" @mouseover="handleEvent($event, someData)">mouseover</div>
+        <div class="box" @mouseleave="handleEvent">mouseleave</div>
+        <div class="box" @dblclick="handleEvent">double click</div>
+        <div class="box" @mousemove="handleMousemove">({{x}},{{y}})</div>
+      </section>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
