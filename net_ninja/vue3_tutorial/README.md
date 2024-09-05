@@ -5,4 +5,7 @@
 
 ```sh
 npm create vue@latest
+npm i
 ```
+
+- [`vetur.config.js` setup](https://vuejs.github.io/vetur/guide/setup.html#advanced)
