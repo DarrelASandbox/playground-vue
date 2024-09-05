@@ -33,3 +33,7 @@ a,
     padding: 0 2rem;
   }
 }
+
+section {
+  padding: 10px 0;
+}
