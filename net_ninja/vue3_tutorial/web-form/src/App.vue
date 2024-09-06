@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+import SignUpForm from './components/SignUpForm.vue';
+</script>
 
 <template>
-  <h1>Web Form</h1>
+  <SignUpForm />
 </template>
 
 <style scoped></style>
