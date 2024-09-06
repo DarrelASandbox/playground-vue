@@ -1,6 +1,11 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterLink, RouterView, useRouter } from 'vue-router';
+import HelloWorld from './components/HelloWorld.vue';
+
+const router = useRouter();
+const redirect = () => router.push('/about');
+const back = () => router.back();
+const forward = () => router.forward();
 </script>
 
 <template>
@@ -14,6 +19,10 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
+
+      <button @click="redirect">Go to About</button>
+      <button @click="back">Back</button>
+      <button @click="forward">Forward</button>
     </div>
   </header>
 
