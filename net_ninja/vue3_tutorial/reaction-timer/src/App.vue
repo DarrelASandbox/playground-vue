@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import Block from './components/Block.vue';
+import Results from './components/Results.vue';
 
 const isPlaying = ref(false);
 const delay = ref(0);
@@ -24,7 +25,7 @@ const endGame = (reactionTime) => {
   <h1>Reaction Timer</h1>
   <button @click="start" v-show="!isPlaying" class="playBtn">▶️</button>
   <Block v-if="isPlaying" :delay="delay" @stop="endGame" />
-  <p v-if="showResults">Reaction Time: {{ score }} ms</p>
+  <Results v-if="showResults" :score="score" />
 </template>
 
 <style>
