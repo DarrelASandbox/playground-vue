@@ -1,13 +1,23 @@
 <script setup lang="ts">
+import type { OrderTerm } from '@/types/OrderTerm';
+import { computed } from 'vue';
 import type { Job } from '../types/Job';
 
-const props = defineProps<{ jobs: Job[] }>();
+const props = defineProps<{ jobs: Job[]; order: OrderTerm }>();
+
+// Creates a computed property that returns a sorted array of jobs based on the selected order property.
+// It first creates a shallow copy of the jobs array, then sorts it by the given property (e.g., title, salary).
+const sortedJobs = computed(() =>
+  [...props.jobs].sort((a: Job, b: Job) => (a[props.order] > b[props.order] ? 1 : -1))
+);
 </script>
 
 <template>
   <div class="job-list">
+    <p>Ordered by {{ props.order }}</p>
+
     <ul>
-      <li v-for="job in props.jobs" :key="job.id">
+      <li v-for="job in sortedJobs" :key="job.id">
         <h2>{{ job.title }}</h2>
         in {{ job.location }}
         <div class="salary">
