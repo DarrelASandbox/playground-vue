@@ -16,11 +16,12 @@ const sortedJobs = computed(() =>
   <div class="job-list">
     <p>Ordered by {{ props.order }}</p>
 
-    <ul>
+    <transition-group name="list" tag="ul">
       <li v-for="job in sortedJobs" :key="job.id">
         <h2>{{ job.title }}</h2>
         in {{ job.location }}
         <div class="salary">
+          <img src="../assets/rupee.svg" alt="rupee icon" />
           <p>{{ job.salary }} rupees</p>
         </div>
 
@@ -35,7 +36,7 @@ const sortedJobs = computed(() =>
           </p>
         </div>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -68,5 +69,8 @@ const sortedJobs = computed(() =>
   color: #17bf66;
   font-weight: bold;
   margin: 10px 4px;
+}
+.list-move {
+  transition: all 1s;
 }
 </style>
