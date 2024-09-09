@@ -8,16 +8,41 @@ const items = ref([
 ]);
 
 const getList = (list) => items.value.filter((item) => item.list === list);
+
+const startDrag = (e, item) => {
+  console.log(item);
+  e.dataTransfer.dropEffect = 'move';
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('itemID', item.id);
+};
+
+const onDrop = (e, list) => {
+  const itemID = e.dataTransfer.getData('itemID');
+  const item = items.value.find((item) => item.id == itemID);
+  item.list = list;
+};
 </script>
 
 <template>
-  <div class="drop-zone">
-    <div v-for="item in getList(1)" :key="item.id" class="drag-el">
+  <div class="drop-zone" @drop="(e) => onDrop(e, 1)" @dragenter.prevent @dragover.prevent>
+    <div
+      v-for="item in getList(1)"
+      :key="item.id"
+      class="drag-el"
+      draggable="true"
+      @dragstart="(e) => startDrag(e, item)"
+    >
       {{ item.title }}
     </div>
   </div>
-  <div class="drop-zone">
-    <div v-for="item in getList(2)" :key="item.id" class="drag-el">
+  <div class="drop-zone" @drop="(e) => onDrop(e, 2)" @dragenter.prevent @dragover.prevent>
+    <div
+      v-for="item in getList(2)"
+      :key="item.id"
+      class="drag-el"
+      draggable="true"
+      @dragstart="(e) => startDrag(e, item)"
+    >
       {{ item.title }}
     </div>
   </div>
