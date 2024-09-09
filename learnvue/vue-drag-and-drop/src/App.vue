@@ -7,19 +7,19 @@ const items = ref([
   { id: 2, title: 'Item C', list: 2 },
 ]);
 
+let draggedItem = null;
 const getList = (list) => items.value.filter((item) => item.list === list);
 
 const startDrag = (e, item) => {
-  console.log(item);
+  draggedItem = item;
   e.dataTransfer.dropEffect = 'move';
   e.dataTransfer.effectAllowed = 'move';
-  e.dataTransfer.setData('itemID', item.id);
 };
 
 const onDrop = (e, list) => {
-  const itemID = e.dataTransfer.getData('itemID');
-  const item = items.value.find((item) => item.id == itemID);
-  item.list = list;
+  if (draggedItem) draggedItem.list = list;
+  console.log(draggedItem);
+  draggedItem = null; // clear dragged item after drop
 };
 </script>
 
