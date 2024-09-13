@@ -1,11 +1,13 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import TaskDetails from './components/TaskDetails.vue';
 import TaskForm from './components/TaskForm.vue';
 import { useTaskStore } from './stores/TaskStore';
 
 const taskStore = useTaskStore();
 const showTasks = ref('all');
+
+onMounted(async () => await taskStore.getTasks());
 </script>
 
 <template>
@@ -21,6 +23,8 @@ const showTasks = ref('all');
       <button @click="showTasks = 'all'">All Tasks</button>
       <button @click="showTasks = 'fav'">Fav Tasks</button>
     </nav>
+
+    <div class="loading" v-if="taskStore.isLoading">Loading tasks...</div>
 
     <div class="task-list" v-if="showTasks === 'all'">
       <p>Total Tasks: {{ taskStore.totalTaskCount }}</p>

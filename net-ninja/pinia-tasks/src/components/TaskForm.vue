@@ -8,7 +8,7 @@ const newTask = ref('');
 const handleSubmit = () => {
   if (newTask.value.length > 0)
     taskStore.addTask({
-      id: Math.floor(Math.random() * 10000),
+      id: Math.floor(Math.random() * 10000).toString(),
       title: newTask.value,
       isFav: false,
     });
